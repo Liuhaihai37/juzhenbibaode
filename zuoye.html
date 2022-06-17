@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = Number(prompt("行数"));
+        var b = Number(prompt("列数"));
+        function fun(n, m) {
+            var arr = [];
+            for (var i = 0; i < n; i++) {
+                arr[i] = 0;
+            }
+            for (var j = 0; j < n; j++) {
+                arr[j] = new Array();
+            }
+            return arr;
+        }
+        arr1 = fun(a, b)
+        for (var k = 0; k < a; k++) {
+            for (var l = 0; l < b; l++) {
+                arr1[k][l] = Number(prompt("请输入第" + (k + 1) + "行" + "第" + (l + 1) + "列"));
+            }
+        }
+        console.log(arr1);
+        arr2 = fun(a, b);  //闭包
+        arr3 = fun(a, b);
+        arr4 = fun(a, b);
+        for (var q = 0; q < a; q++) {
+            for (var w = 0; w < b; w++) {
+                arr2[q][w] = arr1[q][w];
+                if (q == w) {
+                    arr2[q][w] = 1;
+                }
+            }
+        }
+        console.log(arr2);//闭包
+        for (var i = 0; i < a; i++) {
+            for (var j = 0; j < b; j++) {
+                arr3[i][j] = arr1[i][j];
+            }
+        }
+        for (var e = 0; e < a; e++) {
+            for (var r = 0; r < b; r++) {
+                if (arr1[e][r] == 1) {
+                    arr3[r][e] = 1;
+                }
+            }
+        }
+        console.log(arr3); //对称
+        for (var i = 0; i < a; i++) {
+            for (var j = 0; j < b; j++) {
+                arr4[i][j] = arr1[i][j];
+            }
+        }
+        function fun1(q, p) {
+            var m = new Array(q.length);
+            for (var i = 0; i < q.length; i++) {
+                m[i] = new Array(p[0].length);
+                for (var j = 0; j < p[0].length; j++) {
+                    m[i][j] = 0;
+                    for (var k = 0; k < p[0].length; k++) {
+                        if (q[i][k] == 1 && p[k][j] == 1) {
+                            m[i][j] = 1;
+                            break;
+                        } else {
+                            m[i][j] = 0;
+                        }
+                    }
+                }
+            }
+            return m;
+        }
+        var arr11 = fun1(arr1, arr1);
+        var arr12 = fun1(arr11, arr1);
+        for (var i = 0; i < a; i++) {
+            for (var j = 0; j < b; j++) {
+                if (arr1[i][j] == 1 || arr11[i][j] == 1 || arr12[i][j] == 1) {
+                    arr4[i][j] = 1;
+                } else {
+                    arr4[i][j] = 0;
+                }
+            }
+        }
+        console.log(arr4);
+    </script>
+</body>
+
+</html>
